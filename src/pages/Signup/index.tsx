@@ -1,18 +1,23 @@
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import "./auth.css";
 import { useState } from "react";
 import { authRepository } from "../../modules/auth/auth.repository";
+import { useCurrentUserStore } from "../../modules/auth/current-user.state";
 
 function Signup() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassWord] = useState("");
+  const { currentUser, setCurrentUser } = useCurrentUserStore();
 
   const signup = async () => {
     if (name == "" || email == "" || password == "") return;
     const { user, token } = await authRepository.signup(name, email, password);
-    console.log(user, token);
+    localStorage.setItem("token", token);
+    setCurrentUser(user);
   };
+
+  if (currentUser != null) return <Navigate to="/" />;
 
   return (
     <div className="signup-container">
