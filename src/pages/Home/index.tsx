@@ -8,9 +8,6 @@ import { useEffect, useState } from "react";
 import type { Workspace } from "../../modules/workspaces/workspace.entity";
 import { workspaceRepository } from "../../modules/workspaces/workspace.repository";
 
-interface Props {
-  workspaces: any[];
-}
 function Home() {
   const { currentUser } = useCurrentUserStore();
   const [workspaces, setWorkspaces] = useState<Workspace[]>();
