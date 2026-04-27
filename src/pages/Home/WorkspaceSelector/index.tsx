@@ -2,15 +2,16 @@ import { useNavigate } from "react-router-dom";
 import { useUiStore } from "../../../modules/ui/ui.state";
 import { workspaceRepository } from "../../../modules/workspaces/workspace.repository";
 import CreateWorkspaceModal from "./CreateWorkspaceModal";
-import ProfileModal from "./ProfileModal";
+// import ProfileModal from "./ProfileModal";
 import { Workspace } from "../../../modules/workspaces/workspace.entity";
 
 interface Props {
   workspaces: Workspace[];
+  selectedWorkspaceId: string;
 }
 
 function WorkspaceSelector(props: Props) {
-  const { workspaces } = props;
+  const { workspaces, selectedWorkspaceId } = props;
   const { showCreateWorkspaceModal, setShowCreateWorkspaceModal } =
     useUiStore();
   const navigate = useNavigate();
@@ -30,7 +31,7 @@ function WorkspaceSelector(props: Props) {
         {workspaces.map((workspace) => (
           <div
             key={workspace.id}
-            className={"workspace-icon"}
+            className={`workspace-icon ${selectedWorkspaceId == workspace.id ? "active" : ""}`}
             onClick={() =>
               navigate(`/${workspace.id}/${workspace.channels[0].id}`)
             }
