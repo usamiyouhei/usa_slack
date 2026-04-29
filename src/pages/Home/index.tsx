@@ -50,10 +50,11 @@ function Home() {
       <WorkspaceSelector
         workspaces={workspaces}
         selectedWorkspaceId={workspaceId!}
+        setWorkspaces={setWorkspaces}
       />
       {selectedWorkspace != null ? (
         <>
-          <Sidebar selectedWorkspace={selectedWorkspace} />
+          <Sidebar selectedWorkspace={selectedWorkspace} channels={channels} />
           <MainContent />
         </>
       ) : (
