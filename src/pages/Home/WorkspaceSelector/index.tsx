@@ -7,11 +7,12 @@ import { Workspace } from "../../../modules/workspaces/workspace.entity";
 
 interface Props {
   workspaces: Workspace[];
+  setWorkspaces: (workspaces: Workspace[]) => void;
   selectedWorkspaceId: string;
 }
 
 function WorkspaceSelector(props: Props) {
-  const { workspaces, selectedWorkspaceId } = props;
+  const { workspaces, setWorkspaces, selectedWorkspaceId } = props;
   const { showCreateWorkspaceModal, setShowCreateWorkspaceModal } =
     useUiStore();
   const navigate = useNavigate();
@@ -20,6 +21,7 @@ function WorkspaceSelector(props: Props) {
     try {
       const newWorkspace = await workspaceRepository.create(name);
       setShowCreateWorkspaceModal(false);
+      setWorkspaces([...workspaces, newWorkspace]);
       navigate(`/${newWorkspace.id}/${newWorkspace.channels[0].id}`);
     } catch (error) {
       console.error("ワークスペースの作成に失敗しました", error);

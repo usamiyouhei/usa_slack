@@ -4,10 +4,11 @@ import UserSearchModal from "./UserSearchModal";
 
 interface Props {
   selectedWorkspace: Workspace;
+  channels: string;
 }
 
 function Sidebar(props: Props) {
-  const { selectedWorkspace } = props;
+  const { selectedWorkspace, channels } = props;
   return (
     <div className="sidebar">
       <div className="workspace-header">
